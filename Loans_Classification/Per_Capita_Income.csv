@@ -1,0 +1,70 @@
+"SAINC51 Disposable Personal Income Summary: Disposable Personal Income, Population, and Per Capita Disposable Personal Income"
+"Per capita disposable personal income (Dollars) 2/" 
+"Bureau of Economic Analysis" 
+"State or DC"
+"GeoFips","GeoName","2018"
+"00000","United States *",48101
+"01000","Alabama",38215
+"02000","Alaska *",54430
+"04000","Arizona",39955
+"05000","Arkansas",39171
+"06000","California",54800
+"08000","Colorado",51405
+"09000","Connecticut",65063
+"10000","Delaware",46406
+"11000","District of Columbia",70167
+"12000","Florida",45273
+"13000","Georgia",41578
+"15000","Hawaii *",49487
+"16000","Idaho",39587
+"17000","Illinois",49890
+"18000","Indiana",42383
+"19000","Iowa",44965
+"20000","Kansas",46057
+"21000","Kentucky",38075
+"22000","Louisiana",42055
+"23000","Maine",43909
+"24000","Maryland",55128
+"25000","Massachusetts",61147
+"26000","Michigan",42979
+"27000","Minnesota",49902
+"28000","Mississippi",34752
+"29000","Missouri",42647
+"30000","Montana",42627
+"31000","Nebraska",47931
+"32000","Nevada",44046
+"33000","New Hampshire",54991
+"34000","New Jersey",59180
+"35000","New Mexico",38068
+"36000","New York",58005
+"37000","North Carolina",41049
+"38000","North Dakota",50037
+"39000","Ohio",43579
+"40000","Oklahoma",42008
+"41000","Oregon",44397
+"42000","Pennsylvania",49869
+"44000","Rhode Island",48742
+"45000","South Carolina",39401
+"46000","South Dakota",47755
+"47000","Tennessee",42922
+"48000","Texas",45904
+"49000","Utah",41278
+"50000","Vermont",48620
+"51000","Virginia",50627
+"53000","Washington",55452
+"54000","West Virginia",37061
+"55000","Wisconsin",45733
+"56000","Wyoming",54713
+"91000","New England",58562
+"92000","Mideast",55682
+"93000","Great Lakes",45261
+"94000","Plains",46308
+"95000","Southeast",42557
+"96000","Southwest",44128
+"97000","Rocky Mountain",46495
+"98000","Far West *",53399
+"Legend / Footnotes:"
+"2/ Per capita disposable personal income is total disposable personal income divided by total midyear population."
+"* Alaska and Hawaii are included in the U.S. and Far West region totals for 1950-59. Disposable personal income is not available for 1950-59 for Alaska and Hawaii."
+"Note-- All dollar estimates are in millions of current dollars (not adjusted for inflation). Calculations are performed on unrounded data."
+"Last updated: September 24, 2019-- revised statistics for 1998-2018."
