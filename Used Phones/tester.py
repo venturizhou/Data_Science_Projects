@@ -1,7 +1,7 @@
 from selenium import webdriver
 
-PATH = "C:/Users/venturi/Work/Data_Science_Projects/Used Phones/msedgedriver.exe"
-driver = webdriver.Edge(PATH)
+# PATH = '/home/venturi/Documents/Data_Science_Projects/Used Phones/geckodriver'
+driver = webdriver.Chrome()
 
 driver.get("https://swappa.com")
 
@@ -17,11 +17,11 @@ def scrape_iPhone_11():
     # driver.find_element_by_css_selector("[title*='T-Mobile']").click()
     # driver.find_element_by_css_selector("[title*='Verizon']").click()
 
-driver.find_element_by_css_selector("[title=iPhones").click()
-driver.find_element_by_css_selector("[title='Cheap iPhone 11']").click()
+driver.find_element_by_css_selector("[title='Buy and sell iPhones'").click()
+driver.find_element_by_css_selector("[title='Buy used iPhone 11']").click()
 # driver.find_element_by_css_selector("[title*='Unlocked']").click()
-link = driver.find_element_by_css_selector("a[href*='unlocked']")
-print(link.get_attribute('innerHTML'))
+# link = driver.find_element_by_css_selector("a[href*='unlocked']")
+# print(link.get_attribute('innerHTML'))
 # scrape_iPhone_11()
 # driver.quit()
 
