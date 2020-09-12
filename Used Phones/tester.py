@@ -2,14 +2,46 @@ from selenium import webdriver
 from bs4 import BeautifulSoup
 from requests import get
 import pandas as pd
+from time import sleep
 
-# PATH = '/home/venturi/Documents/Data_Science_Projects/Used Phones/geckodriver'
-# driver = webdriver.Chrome()
+df = pd.DataFrame(columns=['OS', 'Carrier', 'Color', 'Storage', 'ListDate', 'SaleDate', 'Views', 'Quanity','Price', 'Condition', 'Description', 'Damage', 'Sold'])
 
+def grab_info(URL, df):
+    page = get(URL)
+    soup = BeautifulSoup(page.content,'lxml')
+    
+    price = soup.select('div[class*="listing_price"]')[0].find('span').text
+    attributes = soup.find_all('div', attrs={'class':'listing_attr'})
+    condition = soup.find('span',attrs={'class':'speclabel'}).text
+    description = soup.find_all('div', attrs={'class': 'desc_block'})[0].text.strip('\n')
+    damage = soup.find_all('div', attrs={'class': 'desc_block'})[1].text.strip('\n')
+         
 
-# driver.get("https://swappa.com")
+    lst = [attribute.find('span',attrs={'class':'value'}).text for attribute in attributes]
+    lst = list(map(lambda x:''.join(char for char in x if char.isalnum()),lst))
+    lst.append(price)
+    lst.append(condition)
+    lst.append(description)
+    lst.append(damage)
+    if soup.select('div[class*="disabled"]'):
+        lst.append('Yes')
+    else:
+        lst.append('No')
+    df.loc[URL[-9::]] = lst
 
+driver = webdriver.Chrome()
+driver.get("https://swappa.com/mobile/buy/apple-iphone-11-pro/unlocked")
 
+for links in driver.find_elements_by_css_selector("[class='listing_row']"):
+    links.click()
+    current = driver.current_url
+    print(current)
+    sleep(5)
+    grab_info(current, df)
+    driver.back()
+    sleep(5)
+
+print(df)
 # def scrape_iPhone_11():
     # driver.find_element_by_css_selector("[title='Cheap iPhone 11'").click()
     # unlocked iPhones
@@ -31,24 +63,13 @@ import pandas as pd
 #         URL = driver.current_url
 #         grab_info(URL)
 #     print(temp)
-
-def grab_info(URL):
-    page = get(URL)
-    soup = BeautifulSoup(page.content,'lxml')
-    price = soup.find('div', attrs={'class':'listing_price listing_price_closed'}).find('span').text
-    attributes = soup.find_all('div', attrs={'class':'listing_attr'})
-    lst = [attribute.find('span',attrs={'class':'value'}).text for attribute in attributes]
-    lst = list(map(lambda x:''.join(char for char in x if char.isalnum()),lst))
     
-    print(f'Attributes List: {lst}')
-    print(f'Price: ${price}')
-    
-    
-grab_info('https://swappa.com/listing/view/LUJS78801')
+# grab_info('https://swappa.com/listing/view/LUJS78801', df)
+# print(df)
 
 # driver.find_element_by_css_selector("[title='Buy and sell iPhones'").click()
 # driver.find_element_by_css_selector("[title='Buy used iPhone 11 Pro']").click()
-# driver.find_element_by_css_selector("[title*='Unlocked']").click()                                                                                                    
+# driver.find_element_by_css_selector("a[href*='unlocked']").click()                                                                                                    
 # temp = driver.find_element_by_id(
 #     'section_more').find_elements_by_partial_link_text("listing")
 # print(temp)
