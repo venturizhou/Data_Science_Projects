@@ -39,21 +39,21 @@ def grab_info(URL, df):
         lst.append('No')
     df.loc[URL[-9::]] = lst
 
-def scroll_down():
-    """A method for scrolling the page."""
-    # Get scroll height.
-    last_height = driver.execute_script("return document.body.scrollHeight")
-    while True:
-        # Scroll down to the bottom.
-        driver.execute_script(
-            "window.scrollTo(0, document.body.scrollHeight);")
-        # Wait to load the page.
-        sleep(2)
-        # Calculate new scroll height and compare with last scroll height.
-        new_height = driver.execute_script("return document.body.scrollHeight")
-        if new_height == last_height:
-            break
-        last_height = new_height
+# def scroll_down():
+#     """A method for scrolling the page."""
+#     # Get scroll height.
+#     last_height = driver.execute_script("return document.body.scrollHeight")
+#     while True:
+#         # Scroll down to the bottom.
+#         driver.execute_script(
+#             "window.scrollTo(0, document.body.scrollHeight);")
+#         # Wait to load the page.
+#         sleep(2)
+#         # Calculate new scroll height and compare with last scroll height.
+#         new_height = driver.execute_script("return document.body.scrollHeight")
+#         if new_height == last_height:
+#             break
+#         last_height = new_height
 
 grab_info('https://swappa.com/listing/view/LUBQ33062', df)
 print(df)
