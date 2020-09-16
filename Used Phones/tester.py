@@ -74,8 +74,11 @@ def scroll_down():
             break
         last_height = new_height
 
+# surface
+driver = webdriver.Edge(r'edgedriver_arm64\msedgedriver.exe')
 
-driver = webdriver.Chrome()
+# linux desktop
+# driver = webdriver.Chrome()
 carriers = ['/att', '/sprint', '/unlocked', '/verizon', '/t-mobile']
 surls = ["https://swappa.com/buy/apple-iphone-11", "https://swappa.com/buy/apple-iphone-11-pro", "https://swappa.com/buy/apple-iphone-11-pro-max",
          "https://swappa.com/buy/apple-iphone-xr", "https://swappa.com/buy/apple-iphone-xs", "https://swappa.com/buy/apple-iphone-xs-max", "https://swappa.com/buy/apple-iphone-x",
@@ -94,4 +97,7 @@ for carrier in carriers:
             grab_info(links, df)
             sleep(3)
 
-df.to_csv('Data_Science_Projects/Used Phones/storage.csv')
+#surface
+df.to_csv(r'C:\Users\ventu\WSL\Python\Data_Science_Projects\Used Phones\storage.csv')
+#linux desktop
+# df.to_csv('Data_Science_Projects/Used Phones/storage.csv')
