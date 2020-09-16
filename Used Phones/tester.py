@@ -8,9 +8,12 @@ from requests import get
 import pandas as pd
 from time import sleep
 
-df = pd.DataFrame(columns=['Model', 'Platform', 'Carrier', 'Color', 'Storage', 'ListDate', 'ExpiredDate', 'SaleDate',
-                           'Views', 'Quantity', 'Price', 'Condition', 'Description', 'Damage', 'Sold'])
+# only used if not reading in front existing dataframe
+# df = pd.DataFrame(columns=['Model', 'Platform', 'Carrier', 'Color', 'Storage', 'ListDate', 'ExpiredDate', 'SaleDate',
+#                            'Views', 'Quantity', 'Price', 'Condition', 'Description', 'Damage', 'Sold'])
 
+#surface
+df = pd.read_csv(r'C:\Users\ventu\WSL\Python\Data_Science_Projects\Used Phones\storage.csv')
 
 def grab_info(URL, df):
     page = get(URL)
