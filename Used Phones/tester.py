@@ -14,6 +14,7 @@ from time import sleep
 
 #surface
 df = pd.read_csv(r'C:\Users\ventu\WSL\Python\Data_Science_Projects\Used Phones\storage.csv')
+df = df.set_index('Listing')
 
 def grab_info(URL, df):
     page = get(URL)
@@ -55,11 +56,19 @@ def grab_info(URL, df):
             'span').text.strip('\n\t')    
     df.loc[URL[-9::]] = temp
 
-# def Egrab_info(url, df):
-#     page = get(URL)
-#     soup = BeautifulSoup(page.content, 'lxml')
-#     temp = dict.fromkeys(['Model', 'Platform', 'Carrier', 'Color', 'Storage', 'ListDate', 'ExpiredDate', 'SaleDate',
-#                           'Views', 'Quantity', 'Price', 'Condition', 'Title', 'Description', 'Damage', 'Sold'])
+def Egrab_info(url, df):
+    page = get(url)
+    soup = BeautifulSoup(page.content, 'lxml')
+    temp = dict.fromkeys(['Model', 'Platform', 'Carrier', 'Color', 'Storage', 'ListDate', 'ExpiredDate', 'SaleDate',
+                          'Views', 'Quantity', 'Price', 'Condition', 'Title', 'Description', 'Damage', 'Sold'])
+
+    listingnumber = soup.find(id='descItemNumber').text
+    temp['Model'] = soup.find('td', string='Model').find_next_sibling('td').text
+    temp['Platform'] = soup.find('td', attrs={'class':''})
+    temp['Carrier'] 
+    temp['Color']
+
+    df.loc[listingnumber] == temp
 
 def scroll_down():
     """A method for scrolling the page."""
