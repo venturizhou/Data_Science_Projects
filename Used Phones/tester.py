@@ -12,8 +12,12 @@ from time import sleep
 # df = pd.DataFrame(columns=['Model', 'Platform', 'Carrier', 'Color', 'Storage', 'ListDate', 'ExpiredDate', 'SaleDate',
 #                            'Views', 'Quantity', 'Price', 'Condition', 'Description', 'Damage', 'Sold'])
 
-#surface
-df = pd.read_csv(r'C:\Users\ventu\WSL\Python\Data_Science_Projects\Used Phones\storage.csv')
+# surface
+# df = pd.read_csv(r'C:\Users\ventu\WSL\Python\Data_Science_Projects\Used Phones\storage.csv')
+# df = df.set_index('Listing')
+
+# linux
+df = pd.read_csv('/home/venturi/Projects/Data_Science_Projects/Used Phones/storage.csv')
 df = df.set_index('Listing')
 
 def grab_info(URL, df):
@@ -38,12 +42,12 @@ def grab_info(URL, df):
         temp['ExpiredDate'] = None
     temp['Quantity'] = soup.find(
         'span', string='Quantity Available').find_next_sibling('span').text.strip('\n\t')
-    temp['Description'] = soup.find('div', attrs={'class': 'desc_block'}).text
+    temp['Description'] = soup.find('div', attrs={'class': 'desc_block'}).text.strip('\n\t')
     temp['Condition'] = soup.find('span', attrs={'class': 'speclabel'}).text
     if temp['Condition'] != 'Mint':
         try:
             temp['Damage'] = soup.find(
-                'div', attrs={'class': 'desc_block'}).find_next_sibling('div').text
+                'div', attrs={'class': 'desc_block'}).find_next_sibling('div').text.strip('\n\t')
         except AttributeError:
             temp['Damage'] = None
     temp['Title'] = soup.find(
@@ -86,11 +90,11 @@ def scroll_down():
             break
         last_height = new_height
 
-# surface
-driver = webdriver.Edge(r'edgedriver_arm64\msedgedriver.exe')
+# comment out if on surface
+# driver = webdriver.Edge(r'edgedriver_arm64\msedgedriver.exe')
 
-# linux desktop
-# driver = webdriver.Chrome()
+# comment out if on linux desktop
+driver = webdriver.Chrome()
 carriers = ['/att', '/sprint', '/unlocked', '/verizon', '/t-mobile']
 surls = ["https://swappa.com/buy/apple-iphone-11", "https://swappa.com/buy/apple-iphone-11-pro", "https://swappa.com/buy/apple-iphone-11-pro-max",
          "https://swappa.com/buy/apple-iphone-xr", "https://swappa.com/buy/apple-iphone-xs", "https://swappa.com/buy/apple-iphone-xs-max", "https://swappa.com/buy/apple-iphone-x",
@@ -109,7 +113,7 @@ for carrier in carriers:
             grab_info(links, df)
             sleep(3)
 
-#surface
-df.to_csv(r'C:\Users\ventu\WSL\Python\Data_Science_Projects\Used Phones\storage.csv')
-#linux desktop
-# df.to_csv('Data_Science_Projects/Used Phones/storage.csv')
+# surface
+# df.to_csv(r'C:\Users\ventu\WSL\Python\Data_Science_Projects\Used Phones\storage.csv')
+# linux desktop
+df.to_csv('Data_Science_Projects/Used Phones/storage.csv')

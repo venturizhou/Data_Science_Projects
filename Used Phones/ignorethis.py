@@ -11,7 +11,6 @@ print(temp)
 # df = pd.DataFrame(columns=['Platform', 'Carrier', 'Color', 'Storage', 'ListDate', 'ExpiredDate', 'SaleDate',
 #                            'Views', 'Quanity', 'Price', 'Condition', 'Title', 'Description', 'Damage', 'Sold'])
 
-
 # def grab_info(URL, df):
 #     page = get(URL)
 #     soup = BeautifulSoup(page.content, 'lxml')
