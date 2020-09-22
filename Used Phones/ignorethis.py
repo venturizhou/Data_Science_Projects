@@ -1,12 +1,14 @@
 import pandas as pd
 from requests import get
 from bs4 import BeautifulSoup
+import re
+from selenium import webdriver
 
-page = get("https://swappa.com/listing/view/LUIZ07739")
-soup = BeautifulSoup(page.content, 'lxml')
+# page = get("https://swappa.com/listing/view/LUIZ07739")
+# soup = BeautifulSoup(page.content, 'lxml')
 
-temp = soup.find('ul', attrs={'class':'breadcrumb'}).find_next("li")
-print(temp)
+# temp = soup.find('ul', attrs={'class':'breadcrumb'}).find_next("li")
+# print(temp)
 
 # df = pd.DataFrame(columns=['Platform', 'Carrier', 'Color', 'Storage', 'ListDate', 'ExpiredDate', 'SaleDate',
 #                            'Views', 'Quanity', 'Price', 'Condition', 'Title', 'Description', 'Damage', 'Sold'])
@@ -41,25 +43,25 @@ print(temp)
 #         'div', attrs={'class': 'col-xs-12 col-md-8'}).find_next('h3').text
 #     df.loc[URL[-9::]] = temp
 
-    # attributes=soup.find_all('div', attrs = {'class': 'listing_attr'})
-    # description=soup.find_all('div', attrs = {'class': 'desc_block'})[
-    #     0].text.strip('\n')
-    # try:
-    #     damage = soup.find_all('div', attrs={'class': 'desc_block'})[
-    #     1].text.strip('\n')
-    # except IndexError:
-    #     damage = "NaN"
+# attributes=soup.find_all('div', attrs = {'class': 'listing_attr'})
+# description=soup.find_all('div', attrs = {'class': 'desc_block'})[
+#     0].text.strip('\n')
+# try:
+#     damage = soup.find_all('div', attrs={'class': 'desc_block'})[
+#     1].text.strip('\n')
+# except IndexError:
+#     damage = "NaN"
 
-    # lst = [attribute.find(
-    #     'span', attrs={'class': 'value'}).text for attribute in attributes]
-    # lst = list(map(lambda x: ''.join(char for char in x if char.isalnum()), lst))
-    # lst.append(description)
-    # lst.append(damage)
-    # if soup.select('div[class*="disabled"]'):
-    #     lst.append('Yes')
-    # else:
-    #     lst.append('No')
-    # df.loc[URL[-9::]]=lst
+# lst = [attribute.find(
+#     'span', attrs={'class': 'value'}).text for attribute in attributes]
+# lst = list(map(lambda x: ''.join(char for char in x if char.isalnum()), lst))
+# lst.append(description)
+# lst.append(damage)
+# if soup.select('div[class*="disabled"]'):
+#     lst.append('Yes')
+# else:
+#     lst.append('No')
+# df.loc[URL[-9::]]=lst
 
 # def grab_info(URL, df):
 #     page = get(URL)
@@ -93,3 +95,32 @@ print(temp)
 
 # grab_info('https://swappa.com/listing/view/LUJT81025', df)
 # print(df)
+
+page = get('https://www.ebay.com/itm/Apple-iPhone-11-Pro-Max-512GB-Silver-Unlocked-A2161-CDMA-GSM/363114014762?epid=14034212915&hash=item548b48282a:g:3jgAAOSwixNfaEjn')
+soup = BeautifulSoup(page.content, 'lxml')
+
+temp = dict.fromkeys(['Model', 'Platform', 'Carrier', 'Color', 'Storage', 'ListDate', 'ExpiredDate', 'SaleDate',
+                      'Views', 'Quantity', 'Price', 'Condition', 'Title', 'Description', 'Damage', 'Sold'])
+
+# listingnumber = soup.find(id='descItemNumber').text
+# price = soup.find('span', id='prcIsum').text.strip('\n\t$')
+# temp['Price'] = int(''.join(re.findall(r'\d+', price)[:-1]))
+# temp['Model'] = soup.find(
+#     'td', string='Model').find_next_sibling('td').text.strip('\n\t')
+# temp['Platform'] = soup.find('td', string="Operating System").find_next_sibling('td').text.strip('\n\t')
+# temp['Color'] = soup.find('td', string="Color").find_next_sibling('td').text.strip('\n\t')
+# temp['Storage'] = soup.find('td', string="Storage Capacity").find_next_sibling('td').text.strip('\n\t')
+# temp["Carrier"] = soup.find(
+#     'td', string='Network').find_next_sibling('td').text.strip('\n\t')
+# temp['Quantity'] = 1
+# #come back and find a better solution
+# temp['SaleDate'] = soup.find('span', id='bb_tlft').text.strip('\n\t\r')[:12]
+# temp['Condition'] = soup.find('div', attrs={'class':'u-flL condText'}).text
+# #come back and find better solution
+# temp['Title'] = soup.find('h1', id='itemTitle').text[16:]
+# temp['Description'] = soup.find('div', id="ds_div").text
+
+
+# print(temp)
+
+lst = soup.find_all('iframe')
