@@ -104,26 +104,26 @@ surls = ["https://swappa.com/buy/apple-iphone-11", "https://swappa.com/buy/apple
          "https://swappa.com/buy/oneplus-8-pro", "https://swappa.com/buy/oneplus-8", "https://swappa.com/buy/oneplus-7-pro", "https://swappa.com/buy/oneplus-7t"]
 
 #all items
-# for carrier in carriers:
-#     for urls in map(lambda x: x+carrier, surls):
-#         driver.get(urls)
-#         scroll_down()
-#         listings = driver.find_elements_by_css_selector("a[href*='listing'")
-#         listingstext = [listing.get_attribute("href") for listing in listings]
-#         for links in listingstext:
-#             grab_info(links, df)
-#             sleep(3)
-
-#only sold items
 for carrier in carriers:
     for urls in map(lambda x: x+carrier, surls):
         driver.get(urls)
         scroll_down()
         listings = driver.find_elements_by_css_selector("a[href*='listing'")
         listingstext = [listing.get_attribute("href") for listing in listings]
-        for links in listingstext[-5::]:
+        for links in listingstext:
             grab_info(links, df)
             sleep(3)
+
+#only sold items
+# for carrier in carriers:
+#     for urls in map(lambda x: x+carrier, surls):
+#         driver.get(urls)
+#         scroll_down()
+#         listings = driver.find_elements_by_css_selector("a[href*='listing'")
+#         listingstext = [listing.get_attribute("href") for listing in listings]
+#         for links in listingstext[-5::]:
+#             grab_info(links, df)
+#             sleep(3)
 
 # surface
 # df.to_csv(r'C:\Users\ventu\WSL\Python\Data_Science_Projects\Used Phones\storage.csv')

@@ -96,31 +96,31 @@ from selenium import webdriver
 # grab_info('https://swappa.com/listing/view/LUJT81025', df)
 # print(df)
 
-page = get('https://www.ebay.com/itm/Apple-iPhone-11-Pro-Max-512GB-Silver-Unlocked-A2161-CDMA-GSM/363114014762?epid=14034212915&hash=item548b48282a:g:3jgAAOSwixNfaEjn')
+page = get('https://www.ebay.com/itm/Apple-iPhone-11-256GB-Black-AT-T-NEW/143754306045?epid=4034210683&hash=item21786ca1fd:g:YYoAAOSwTwxfbSAa')
 soup = BeautifulSoup(page.content, 'lxml')
 
 temp = dict.fromkeys(['Model', 'Platform', 'Carrier', 'Color', 'Storage', 'ListDate', 'ExpiredDate', 'SaleDate',
                       'Views', 'Quantity', 'Price', 'Condition', 'Title', 'Description', 'Damage', 'Sold'])
 
-# listingnumber = soup.find(id='descItemNumber').text
-# price = soup.find('span', id='prcIsum').text.strip('\n\t$')
-# temp['Price'] = int(''.join(re.findall(r'\d+', price)[:-1]))
-# temp['Model'] = soup.find(
-#     'td', string='Model').find_next_sibling('td').text.strip('\n\t')
-# temp['Platform'] = soup.find('td', string="Operating System").find_next_sibling('td').text.strip('\n\t')
-# temp['Color'] = soup.find('td', string="Color").find_next_sibling('td').text.strip('\n\t')
-# temp['Storage'] = soup.find('td', string="Storage Capacity").find_next_sibling('td').text.strip('\n\t')
-# temp["Carrier"] = soup.find(
-#     'td', string='Network').find_next_sibling('td').text.strip('\n\t')
-# temp['Quantity'] = 1
-# #come back and find a better solution
-# temp['SaleDate'] = soup.find('span', id='bb_tlft').text.strip('\n\t\r')[:12]
-# temp['Condition'] = soup.find('div', attrs={'class':'u-flL condText'}).text
-# #come back and find better solution
-# temp['Title'] = soup.find('h1', id='itemTitle').text[16:]
-# temp['Description'] = soup.find('div', id="ds_div").text
+listingnumber = soup.find(id='descItemNumber').text
+price = soup.find('span', id='prcIsum').text.strip('\n\t$')
+temp['Price'] = int(''.join(re.findall(r'\d+', price)[:-1]))
+temp['Model'] = soup.find('td', string="Model").find_next_sibling('td').text.strip('\n\t')
+temp['Platform'] = soup.find('td', string="Operating System").find_next_sibling('td').text.strip('\n\t')
+temp['Color'] = soup.find('td', string="Color").find_next_sibling('td').text.strip('\n\t')
+temp['Storage'] = soup.find('td', string="Storage Capacity").find_next_sibling('td').text.strip('\n\t')
+temp["Carrier"] = soup.find(
+    'td', string='Network').find_next_sibling('td').text.strip('\n\t')
+temp['Quantity'] = 1
+#come back and find a better solution
+temp['SaleDate'] = soup.find('span', id='bb_tlft').text.strip('\n\t\r')[:12]
+temp['Condition'] = soup.find('div', attrs={'class':'u-flL condText'}).text
+#come back and find better solution
+temp['Title'] = soup.find('h1', id='itemTitle').text[16:]
 
+iframe_page = get(soup.find('iframe').attrs['src'])
+soup_iframe = BeautifulSoup(iframe_page.content, 'lxml')
+# temp['Description'] = soup_iframe.find('div')
+print(soup_iframe.find('div'))
 
 # print(temp)
-
-lst = soup.find_all('iframe')
