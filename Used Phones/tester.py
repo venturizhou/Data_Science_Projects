@@ -13,11 +13,11 @@ from time import sleep
 #                            'Views', 'Quantity', 'Price', 'Condition', 'Description', 'Damage', 'Sold'])
 
 # surface
-# df = pd.read_csv(r'C:\Users\ventu\WSL\Python\Data_Science_Projects\Used Phones\storage.csv')
+df = pd.read_csv(r'C:\Users\ventu\pyProjects\Data_Science_Projects\Used Phones\storage.csv',index_col=[0])
 # df = df.set_index('Listing')
 
 # linux
-df = pd.read_csv('/home/venturi/Projects/Data_Science_Projects/Used Phones/storage.csv',index_col=[0])
+# df = pd.read_csv('/home/venturi/Projects/Data_Science_Projects/Used Phones/storage.csv',index_col=[0])
 # df = df.set_index('Listing')
 
 def grab_info(URL, df):
@@ -91,10 +91,10 @@ def scroll_down():
         last_height = new_height
 
 # comment out if on surface
-# driver = webdriver.Edge(r'edgedriver_arm64\msedgedriver.exe')
+driver = webdriver.Edge(r'msedgedriver.exe')
 
 # comment out if on linux desktop
-driver = webdriver.Chrome()
+# driver = webdriver.Chrome()
 carriers = ['/att', '/sprint', '/unlocked', '/verizon', '/t-mobile']
 surls = ["https://swappa.com/buy/apple-iphone-11", "https://swappa.com/buy/apple-iphone-11-pro", "https://swappa.com/buy/apple-iphone-11-pro-max",
          "https://swappa.com/buy/apple-iphone-xr", "https://swappa.com/buy/apple-iphone-xs", "https://swappa.com/buy/apple-iphone-xs-max", "https://swappa.com/buy/apple-iphone-x",
@@ -103,29 +103,29 @@ surls = ["https://swappa.com/buy/apple-iphone-11", "https://swappa.com/buy/apple
          "https://swappa.com/buy/samsung-galaxy-note-20-ultra-5g", "https://swappa.com/buy/google-pixel-4-xl", "https://swappa.com/buy/google-pixel-4",
          "https://swappa.com/buy/oneplus-8-pro", "https://swappa.com/buy/oneplus-8", "https://swappa.com/buy/oneplus-7-pro", "https://swappa.com/buy/oneplus-7t"]
 
-#all items
-# for carrier in carriers:
-#     for urls in map(lambda x: x+carrier, surls):
-#         driver.get(urls)
-#         scroll_down()
-#         listings = driver.find_elements_by_css_selector("a[href*='listing'")
-#         listingstext = [listing.get_attribute("href") for listing in listings]
-#         for links in listingstext:
-#             grab_info(links, df)
-#             sleep(3)
-
-#only sold items
+# all items
 for carrier in carriers:
     for urls in map(lambda x: x+carrier, surls):
         driver.get(urls)
         scroll_down()
         listings = driver.find_elements_by_css_selector("a[href*='listing'")
         listingstext = [listing.get_attribute("href") for listing in listings]
-        for links in listingstext[-5::]:
+        for links in listingstext:
             grab_info(links, df)
             sleep(3)
 
+#only sold items
+# for carrier in carriers:
+#     for urls in map(lambda x: x+carrier, surls):
+#         driver.get(urls)
+#         scroll_down()
+#         listings = driver.find_elements_by_css_selector("a[href*='listing'")
+#         listingstext = [listing.get_attribute("href") for listing in listings]
+#         for links in listingstext[-5::]:
+#             grab_info(links, df)
+#             sleep(3)
+
 # surface
-# df.to_csv(r'C:\Users\ventu\WSL\Python\Data_Science_Projects\Used Phones\storage.csv')
+df.to_csv(r'C:\Users\ventu\pyProjects\Data_Science_Projects\Used Phones\storage.csv')
 # linux desktop
-df.to_csv('Data_Science_Projects/Used Phones/storage.csv')
+# df.to_csv('Data_Science_Projects/Used Phones/storage.csv')
