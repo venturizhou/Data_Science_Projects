@@ -12,13 +12,14 @@ from time import sleep
 # df = pd.DataFrame(columns=['Model', 'Platform', 'Carrier', 'Color', 'Storage', 'ListDate', 'ExpiredDate', 'SaleDate',
 #                            'Views', 'Quantity', 'Price', 'Condition', 'Description', 'Damage', 'Sold'])
 
+#wsl
+# df = pd.read_csv(r'/mnt/c/users/ventu/pyprojects/Data_Science_Projects/Used Phones/storage.csv',index_col=[0])
+
 # surface
 df = pd.read_csv(r'C:\Users\ventu\pyProjects\Data_Science_Projects\Used Phones\storage.csv',index_col=[0])
-# df = df.set_index('Listing')
 
 # linux
 # df = pd.read_csv('/home/venturi/Projects/Data_Science_Projects/Used Phones/storage.csv',index_col=[0])
-# df = df.set_index('Listing')
 
 def grab_info(URL, df):
     page = get(URL)
@@ -89,6 +90,9 @@ def scroll_down():
         if new_height == last_height:
             break
         last_height = new_height
+
+#wsl
+# driver = webdriver.Edge(r'/mnt/c/users/ventu/pyprojects/msedgedriver.exe')
 
 # comment out if on surface
 driver = webdriver.Edge(r'msedgedriver.exe')
