@@ -19,9 +19,11 @@
 To install dependencies:
 
 ```console
-pip install -r requirements
+pip install -r requirements.txt
 ```
 
-#### Formatting Notebooks with Black
-
-Preface notebooks with `%load_ext nb_black`.
+### Setting Up Pre-Commit Hooks
+After installing dependencies:
+```console
+pre-commit install
+```

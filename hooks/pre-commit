@@ -1,0 +1,5 @@
+#!/bin/sh
+
+jupyter nbconvert --clear-output --inplace **/*.ipynb
+
+git add .

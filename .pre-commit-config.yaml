@@ -1,0 +1,20 @@
+- repo: https://github.com/nbQA-dev/nbQA
+  rev: 0.1.29
+  hooks:
+    - id: nbqa
+      args: ['black','--nbqa-mutate']
+      name: nbqa-black
+      alias: nbqa-black
+      additional_dependencies: ['black']
+    - id: nbqa
+      args: ['isort', '--nbqa-mutate']
+      name: nbqa-isort
+      additional_dependencies: ['isort']
+- repo: local
+  hooks:
+    - id: jupyter-nb-clear-output
+      name: jupyter-nb-clear-output
+      files: \.ipynb$
+      stages: [commit]
+      language: system
+      entry: jupyter nbconvert --clear-output --inplace
