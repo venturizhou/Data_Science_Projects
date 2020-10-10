@@ -27,3 +27,9 @@ After installing dependencies:
 ```console
 pre-commit install
 ```
+
+Pre-commit hooks will run upon commit on staged .ipynb files. To apply them to all .ipynb files without committing: 
+
+```console
+pre-commit run --all-files
+```
