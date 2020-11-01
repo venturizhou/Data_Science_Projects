@@ -16,6 +16,7 @@ from time import sleep
 # df = pd.read_csv(r'/mnt/c/users/ventu/pyprojects/Data_Science_Projects/Used Phones/storage.csv',index_col=[0])
 
 # surface
+# check if this works
 df = pd.read_csv(r'C:\Users\ventu\pyProjects\Data_Science_Projects\Used Phones\storage.csv')
 df.set_index('Listing')
 
