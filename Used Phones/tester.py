@@ -17,11 +17,13 @@ from time import sleep
 
 # surface
 # check if this works
-df = pd.read_csv(r'C:\Users\ventu\pyProjects\Data_Science_Projects\Used Phones\storage.csv')
-df.set_index('Listing')
+# df = pd.read_csv(r'C:\Users\ventu\pyProjects\Data_Science_Projects\Used Phones\storage.csv')
+# df.set_index('Listing')
 
 # linux
-# df = pd.read_csv('/home/venturi/Projects/Data_Science_Projects/Used Phones/storage.csv',index_col=[0])
+df = pd.read_csv('/home/venturizhou/pyProjects/Data_Science_Projects/Used Phones/storage.csv')
+df.drop(df.columns[df.columns.str.contains('unnamed',case = False)],axis = 1, inplace = True)
+df = df.set_index('Listing')
 
 def grab_info(URL, df):
     page = get(URL)
@@ -97,7 +99,7 @@ def scroll_down():
 # driver = webdriver.Edge(r'/mnt/c/users/ventu/pyprojects/msedgedriver.exe')
 
 # comment out if on surface
-driver = webdriver.Edge(r'msedgedriver.exe')
+driver = webdriver.Chrome('/home/venturizhou/pyProjects/chromedriver')
 
 # comment out if on linux desktop
 # driver = webdriver.Chrome()
@@ -110,28 +112,28 @@ surls = ["https://swappa.com/buy/apple-iphone-11", "https://swappa.com/buy/apple
          "https://swappa.com/buy/oneplus-8-pro", "https://swappa.com/buy/oneplus-8", "https://swappa.com/buy/oneplus-7-pro", "https://swappa.com/buy/oneplus-7t"]
 
 # all items
-# for carrier in carriers:
-#     for urls in map(lambda x: x+carrier, surls):
-#         driver.get(urls)
-#         scroll_down()
-#         listings = driver.find_elements_by_css_selector("a[href*='listing'")
-#         listingstext = [listing.get_attribute("href") for listing in listings]
-#         for links in listingstext:
-#             grab_info(links, df)
-#             sleep(3)
-
-#only sold items
 for carrier in carriers:
     for urls in map(lambda x: x+carrier, surls):
         driver.get(urls)
         scroll_down()
         listings = driver.find_elements_by_css_selector("a[href*='listing'")
         listingstext = [listing.get_attribute("href") for listing in listings]
-        for links in listingstext[-5::]:
+        for links in listingstext:
             grab_info(links, df)
             sleep(3)
 
+#only sold items
+# for carrier in carriers:
+#     for urls in map(lambda x: x+carrier, surls):
+#         driver.get(urls)
+#         scroll_down()
+#         listings = driver.find_elements_by_css_selector("a[href*='listing'")
+#         listingstext = [listing.get_attribute("href") for listing in listings]
+#         for links in listingstext[-5::]:
+#             grab_info(links, df)
+#             sleep(3)
+
 # surface
-df.to_csv(r'C:\Users\ventu\pyProjects\Data_Science_Projects\Used Phones\storage.csv')
+# df.to_csv(r'C:\Users\ventu\pyProjects\Data_Science_Projects\Used Phones\storage.csv')
 # linux desktop
-# df.to_csv('Data_Science_Projects/Used Phones/storage.csv')
+df.to_csv('/home/venturizhou/pyProjects/Data_Science_Projects/Used Phones/storage.csv')
