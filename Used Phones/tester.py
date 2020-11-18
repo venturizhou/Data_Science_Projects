@@ -17,13 +17,13 @@ from time import sleep
 
 # surface
 # check if this works
-# df = pd.read_csv(r'C:\Users\ventu\pyProjects\Data_Science_Projects\Used Phones\storage.csv')
-# df.set_index('Listing')
+df = pd.read_csv(r'C:\Users\ventu\pyProjects\Data_Science_Projects\Used Phones\storage.csv')
+df.set_index('Listing')
 
 # linux
-df = pd.read_csv('/home/venturizhou/pyProjects/Data_Science_Projects/Used Phones/storage.csv')
-df.drop(df.columns[df.columns.str.contains('unnamed',case = False)],axis = 1, inplace = True)
-df = df.set_index('Listing')
+# df = pd.read_csv('/home/venturizhou/pyProjects/Data_Science_Projects/Used Phones/storage.csv')
+# df.drop(df.columns[df.columns.str.contains('unnamed',case = False)],axis = 1, inplace = True)
+# df = df.set_index('Listing')
 
 def grab_info(URL, df):
     page = get(URL)
@@ -96,10 +96,10 @@ def scroll_down():
         last_height = new_height
 
 #wsl
-# driver = webdriver.Edge(r'/mnt/c/users/ventu/pyprojects/msedgedriver.exe')
+driver = webdriver.Edge(r'C:\Users\ventu\pyProjects\msedgedriver.exe')
 
 # comment out if on surface
-driver = webdriver.Chrome('/home/venturizhou/pyProjects/chromedriver')
+# driver = webdriver.Chrome('/home/venturizhou/pyProjects/chromedriver')
 
 # comment out if on linux desktop
 # driver = webdriver.Chrome()
@@ -134,6 +134,6 @@ for carrier in carriers:
 #             sleep(3)
 
 # surface
-# df.to_csv(r'C:\Users\ventu\pyProjects\Data_Science_Projects\Used Phones\storage.csv')
+df.to_csv(r'C:\Users\ventu\pyProjects\Data_Science_Projects\Used Phones\storage.csv')
 # linux desktop
-df.to_csv('/home/venturizhou/pyProjects/Data_Science_Projects/Used Phones/storage.csv')
+# df.to_csv('/home/venturizhou/pyProjects/Data_Science_Projects/Used Phones/storage.csv')
